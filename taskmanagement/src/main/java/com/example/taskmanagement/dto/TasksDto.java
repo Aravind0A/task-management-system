@@ -16,11 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TasksDto {
 
-    private Long id;
     private String title;
     private String description;
     private LocalDate dueDate;
     private Status status;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+ 
 }
