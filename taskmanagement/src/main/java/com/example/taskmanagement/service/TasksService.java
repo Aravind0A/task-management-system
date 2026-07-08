@@ -4,10 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.example.taskmanagement.dto.TasksDto;
 import com.example.taskmanagement.exception.TasksNotFoundException;
 import com.example.taskmanagement.model.Status;
@@ -63,26 +60,19 @@ public class TasksService {
         Tasks exist = tasksRepository.findById(id)
             .orElseThrow(() -> 
                 new TasksNotFoundException("Task not found with id: " + id) );
-        if(exist != null){
             exist.setStatus(Status.COMPLETED);
             exist.setUpdatedAt(LocalDateTime.now());
             tasksRepository.save(exist);
             return exist;
-        } else{
-            throw new TasksNotFoundException("Task not found with id: " + id);
-        }
-    }
+        } 
 
-    public ResponseEntity<?> deleteTasks(Long id){
+    public void deleteTasks(Long id){
         Tasks exist = tasksRepository.findById(id)
             .orElseThrow(() -> 
                 new TasksNotFoundException("Task not found with id: " + id));
-        if(exist == null){
-            throw new TasksNotFoundException("Task not found with id: " + id);
-        } else{
-            tasksRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
+        
+            tasksRepository.delete(exist);
+        
     }
 
     
