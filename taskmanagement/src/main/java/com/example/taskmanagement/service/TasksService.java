@@ -17,6 +17,7 @@ public class TasksService {
     @Autowired
     private TasksRepository tasksRepository;
 
+    // Converts the request DTO into a Task entity before saving
     private Tasks convertToEntity(TasksDto tasksDto) {
         Tasks tasks = new Tasks();
         tasks.setTitle(tasksDto.getTitle());
@@ -28,6 +29,7 @@ public class TasksService {
         return tasks;
     }
 
+    //Save a new task
     public Tasks saveTasks(TasksDto tasksDto){
         return tasksRepository.save(convertToEntity(tasksDto));
     }
@@ -36,6 +38,7 @@ public class TasksService {
         return tasksRepository.findAll();
     }
 
+    // Retrieve task or throw an exception if it does not exist
     public Tasks getTasksById(Long id){
         return tasksRepository.findById(id)
             .orElseThrow(() -> 
@@ -56,6 +59,7 @@ public class TasksService {
             return existingTasks;
     }
 
+    // Update only the task status to COMPLETED
     public Tasks updateStatus(Long id){
         Tasks exist = tasksRepository.findById(id)
             .orElseThrow(() -> 

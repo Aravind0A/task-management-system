@@ -28,33 +28,39 @@ public class TasksController {
     @Autowired
     private TasksService tasksService;
 
+    // Retrieve all tasks
     @GetMapping("/all")
     public List<Tasks> getTasks(){
         return tasksService.getTasks();
     }
 
+    // Create a new task
     @PostMapping("/save")
     public ResponseEntity<Tasks> saveTasks(@Valid @RequestBody TasksDto tasksDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(tasksService.saveTasks(tasksDto));
         
     }
 
+    // Retrieve a task by its unique ID
     @GetMapping("/{id}")
     public Tasks getTasksById(@PathVariable Long id){
         return tasksService.getTasksById(id);
     }
 
+    // Update an existing task
     @PutMapping("/{id}")
     public ResponseEntity<Tasks> updateTasks(@PathVariable Long id, @RequestBody TasksDto tasksDto){
         return ResponseEntity.status(HttpStatus.OK).body(tasksService.updateTasks(id, tasksDto));
     }
 
+    // Mark a task as completed
     @PatchMapping("/{id}/status/complete")
     public ResponseEntity<Tasks> updateStatus(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(tasksService.updateStatus(id));
 
     }
 
+    // Delete a task by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTasks(@PathVariable Long id){
         tasksService.deleteTasks(id);
