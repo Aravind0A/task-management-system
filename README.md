@@ -259,6 +259,7 @@ Handled exceptions include:
 
 - Followed layered architecture (Controller → Service → Repository).
 - Used DTOs to receive client requests.
+- For patch request only "COMPLETED" status is hard-coded
 - Implemented global exception handling for consistent error responses.
 - Used Spring Security Basic Authentication to secure all endpoints.
 - Used H2 in-memory database to keep the application lightweight and easy to run.
@@ -275,6 +276,7 @@ Handled exceptions include:
 - Swagger/OpenAPI Documentation
 - MySQL/PostgreSQL integration
 - Logging using SLF4J
+- Can send different status for the tasks
 
 ---
 
