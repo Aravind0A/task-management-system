@@ -154,9 +154,9 @@ Configured these credentials in the `SecurityConfig` class.
 
 ---
 
-## Running the Application
+## Running the Application(## Testing the API Using Postman)
 
-### Clone Repository
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/Aravind0A/task-management-system.git
@@ -192,6 +192,124 @@ Application starts at
 
 ```
 http://localhost:8080
+```
+
+---
+
+### Step 2: Configure Authentication
+
+Since the API is secured using **Spring Security Basic Authentication**, every request must include valid credentials.
+
+In Postman:
+
+1. Select the **Authorization** tab.
+2. Choose **Basic Auth**.
+3. Enter the following credentials:
+
+| Username | Password |
+|----------|----------|
+| user | password |
+
+---
+
+### Step 3: Test the API Endpoints
+
+#### Retrieve All Tasks
+
+```
+GET http://localhost:8080/tasks
+```
+
+---
+
+#### Retrieve Task by ID
+
+```
+GET http://localhost:8080/tasks/1
+```
+
+---
+
+#### Create a Task
+
+```
+POST http://localhost:8080/tasks
+```
+
+Headers
+
+```
+Content-Type: application/json
+```
+
+Request Body
+
+```json
+{
+    "title": "Complete Spring Boot Case Study",
+    "description": "Implement CRUD operations",
+    "dueDate": "2026-07-20",
+    "status": "PENDING"
+}
+```
+
+Expected Response
+
+```
+201 Created
+```
+
+---
+
+#### Update a Task
+
+```
+PUT http://localhost:8080/tasks/1
+```
+
+Request Body
+
+```json
+{
+    "title": "Updated Task",
+    "description": "Updated Description",
+    "dueDate": "2026-07-25",
+    "status": "IN_PROGRESS"
+}
+```
+
+Expected Response
+
+```
+200 OK
+```
+
+---
+
+#### Mark Task as Completed
+
+```
+PATCH http://localhost:8080/tasks/1/status/complete
+```
+
+Expected Response
+
+```
+200 OK
+```
+
+---
+
+#### Delete Task
+
+```
+DELETE http://localhost:8080/tasks/1
+```
+
+Expected Response
+
+```
+204 No Content
 ```
 
 ---
